@@ -5,56 +5,63 @@ namespace ConsoleUtilitiesLite
 {
     public static class ConsoleUtilitiesLite
     {
-        #region Properties
-        /// <summary>
-        /// Char used to make the divisions on the console.
-        /// </summary>
-        /// <seealso cref="Division"/>
-        /// <seealso cref="Division(int)"/>
-        /// <seealso cref="SubDivision"/>
-        /// <seealso cref="SubDivision(int)"/>
-        public static char DivisionSign { get; set; } = '=';
-
-        /// <summary>
-        /// Text color used in the <c>InfoMessage</c> method.
-        /// </summary>
-        /// <seealso cref="InfoMessage(string, string[])"/>
-        public static ConsoleColor InfoMessageColor { get; set; } = ConsoleColor.DarkGray;
-
-        /// <summary>
-        /// Text color used in the <c>SuccessMessage</c> method.
-        /// </summary>
-        /// <seealso cref="SuccessMessage(string, string[])"/>
-        public static ConsoleColor SuccessMessageColor { get; set; } = ConsoleColor.Green;
-
-        /// <summary>
-        /// Text color used in the <c>WarningMessage</c> method.
-        /// </summary>
-        /// <seealso cref="WarningMessage(string, string[])"/>
-        public static ConsoleColor WarningMessageColor { get; set; } = ConsoleColor.DarkYellow;
-
-        /// <summary>
-        /// Text color used in the <c>ErrorMessage</c> method.
-        /// </summary>
-        /// <seealso cref="ErrorMessage(string, string[])"/>
-        public static ConsoleColor ErrorMessageColor { get; set; } = ConsoleColor.Red;
-
-        /// <summary>
-        /// Text color used in the <c>LogImage</c> method.
-        /// </summary>
-        /// <seealso cref="LogImage(string, string, out string)"/>
-        public static ConsoleColor LogImageColor { get; set; } = ConsoleColor.DarkGray;
-
         /// <summary>
         /// Text color used in the <c>ShowTitle</c> method.
         /// </summary>
         /// <seealso cref="ShowTitle(string[])"/>
         public static ConsoleColor TitleColor { get; set; } = ConsoleColor.Green;
 
+        #region Division Properties
+        /// <summary>
+        /// Char used to make the divisions on the console.
+        /// </summary>
+        /// <seealso cref="Division"/>
+        /// <seealso cref="Division(int)"/>
+        public static char DivisionSign { get; set; } = '=';
+        /// <summary>
+        /// Char used to make the sub divisions on the console.
+        /// </summary>
+        /// <seealso cref="SubDivision"/>
+        /// <seealso cref="SubDivision(int)"/>
+        public static char SubDivisionSign { get; set; } = '=';
+        /// <summary>
+        /// Color used to make divisions on the console.
+        /// </summary>
+        /// <seealso cref="Division"/>
+        /// <seealso cref="Division(int)"/>
+        public static ConsoleColor DivisionColor { get; set; } = ConsoleColor.Cyan;
+        /// <summary>
+        /// Color used to make sub divisions on the console.
+        /// </summary>
+        /// <seealso cref="SubDivision"/>
+        /// <seealso cref="SubDivision(int)"/>
+        public static ConsoleColor SubDivisionColor { get; set; } = ConsoleColor.Yellow;
+        #endregion
+
+        #region Logs Colors
+        /// <summary>
+        /// Text color used in the <c>InfoMessage</c> method.
+        /// </summary>
+        /// <seealso cref="LogInfoMessage(string, string[])"/>
+        public static ConsoleColor InfoMessageColor { get; set; } = ConsoleColor.DarkGray;
+        /// <summary>
+        /// Text color used in the <c>SuccessMessage</c> method.
+        /// </summary>
+        /// <seealso cref="LogSuccessMessage(string, string[])"/>
+        public static ConsoleColor SuccessMessageColor { get; set; } = ConsoleColor.Green;
+        /// <summary>
+        /// Text color used in the <c>WarningMessage</c> method.
+        /// </summary>
+        /// <seealso cref="LogWarningMessage(string, string[])"/>
+        public static ConsoleColor WarningMessageColor { get; set; } = ConsoleColor.DarkYellow;
+        /// <summary>
+        /// Text color used in the <c>ErrorMessage</c> method.
+        /// </summary>
+        /// <seealso cref="LogErrorMessage(string, string[])"/>
+        public static ConsoleColor ErrorMessageColor { get; set; } = ConsoleColor.Red;
         #endregion
 
         #region Simple Methods
-
         /// <summary>
         /// Shows each line of the given array to the console,
         /// uses the color of <c>TitleColor</c>.
@@ -72,20 +79,18 @@ namespace ConsoleUtilitiesLite
             Console.ForegroundColor = ConsoleColor.White;
             Division();
         }
-
         /// <summary>
         /// Logs a Runnning Version message with the color of warning. You can get the version of the assembly by calling:
         /// <c>System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());</c>
         /// </summary>
         /// <param name="version">The version of the assembly.</param>
-        /// <returns>The looged string length.</returns>
+        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
         public static int ShowVersion(string version)
         {
             string loggedMessage = $"Running version: {version}";
-            WarningMessage(loggedMessage);
+            LogWarningMessage(loggedMessage);
             return loggedMessage.Length;
         }
-
         /// <summary>
         /// Returns the <paramref name="text"/> given width the right amount of spaces to be centered on the screen.
         /// </summary>
@@ -96,60 +101,35 @@ namespace ConsoleUtilitiesLite
             int extraSpaces = (int)Math.Ceiling((decimal)(Console.BufferWidth - text.Length) / 2);
             return new string(' ', extraSpaces) + text;
         }
-
         /// <summary>
         /// Creates a Cyan division with the specified <paramref name="length"/>,
         /// uses the <c>DivisionSign</c> property to make the division.
         /// </summary>
         /// <param name="length">The length of the division to create.</param>
         /// <seealso cref="DivisionSign"/>
-        public static void Division(int length)
-        {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(new string(DivisionSign, length));
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-
+        public static void Division(int length) => LogFormat(new string(DivisionSign, length), DivisionColor);
         /// <summary>
-        /// Creates a Cyan division with a length equal to the <c>Console.BufferWidth</c>,
+        /// Creates a division with a length equal to the <c>Console.BufferWidth</c>,
         /// uses the <c>DivisionSign</c> property to make the division.
         /// </summary>
         /// <seealso cref="DivisionSign"/>
-        public static void Division()
-        {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(new string(DivisionSign, Console.BufferWidth));
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-
+        public static void Division() => Division(Console.BufferWidth);
         /// <summary>
-        /// Creates a Cyan sub-division with the specified <paramref name="length"/>,
-        /// uses the <c>DivisionSign</c> property to make the division.
+        /// Creates a sub-division with the specified <paramref name="length"/>,
+        /// uses the <c>SubDivisionSign</c> property to make the division.
         /// </summary>
         /// <param name="length">The length of the division to create.</param>
         /// <seealso cref="DivisionSign"/>
-        public static void SubDivision(int length)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(new string(DivisionSign, length));
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-
+        public static void SubDivision(int length) => LogFormat(new string(DivisionSign, length), SubDivisionColor);
         /// <summary>
-        /// Creates a Cyan sub-division with a length equal to the <c>Console.BufferWidth</c>
-        /// Uses the <c>DivisionSign</c> property to make the division.
+        /// Creates a sub-division with a length equal to the <c>Console.BufferWidth</c>
+        /// Uses the <c>SubDivisionSign</c> property to make the division.
         /// </summary>
         /// <seealso cref="DivisionSign"/>
-        public static void SubDivision()
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(new string(DivisionSign, Console.BufferWidth));
-            Console.ForegroundColor = ConsoleColor.White;
-        }
+        public static void SubDivision() => SubDivision(Console.BufferWidth);
         #endregion
 
         #region Messages Methods
-
         /// <summary>
         /// Shows the specified <paramref name="message"/>,
         /// With the color of <c>InfoMessageColor</c>,
@@ -157,13 +137,8 @@ namespace ConsoleUtilitiesLite
         /// </summary>
         /// <param name="message">The message to write to the console.</param>
         /// <param name="args">An array of objects to write using.</param>
-        public static void InfoMessage(string message, params string[] args)
-        {
-            Console.ForegroundColor = InfoMessageColor;
-            Console.WriteLine(message, args);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-
+        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
+        public static int LogInfoMessage(string message, params string[] args) => LogFormat(message, InfoMessageColor, args);
         /// <summary>
         /// Shows the specified <paramref name="message"/>,
         /// With the color of <c>SuccessMessageColor</c>,
@@ -171,13 +146,8 @@ namespace ConsoleUtilitiesLite
         /// </summary>
         /// <param name="message">The message to write to the console.</param>
         /// <param name="args">An array of objects to write using.</param>
-        public static void SuccessMessage(string message, params string[] args)
-        {
-            Console.ForegroundColor = SuccessMessageColor;
-            Console.WriteLine(message, args);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-
+        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
+        public static int LogSuccessMessage(string message, params string[] args) => LogFormat(message, SuccessMessageColor, args);
         /// <summary>
         /// Shows the specified <paramref name="message"/>,
         /// With the color of <c>WarningMessageColor</c>,
@@ -185,13 +155,8 @@ namespace ConsoleUtilitiesLite
         /// </summary>
         /// <param name="message">The message to write to the console.</param>
         /// <param name="args">An array of objects to write using.</param>
-        public static void WarningMessage(string message, params string[] args)
-        {
-            Console.ForegroundColor = WarningMessageColor;
-            Console.WriteLine(message, args);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-
+        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
+        public static int LogWarningMessage(string message, params string[] args) => LogFormat(message, WarningMessageColor, args);
         /// <summary>
         /// Shows the specified <paramref name="message"/>,
         /// With the color of <c>ErrorMessageColor</c>,
@@ -199,25 +164,28 @@ namespace ConsoleUtilitiesLite
         /// </summary>
         /// <param name="message">The message to write to the console.</param>
         /// <param name="args">An array of objects to write using.</param>
-        public static void ErrorMessage(string message, params string[] args)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Error.WriteLine(message, args);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
+        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
+        public static int LogErrorMessage(string message, params string[] args) => LogFormat(message, ErrorMessageColor, args);
         #endregion
-        /// <summary>
-        /// Logs a message to the console, by default this message will be dark gray,
-        /// you can use this function the same you will use Console.WriteLine.
-        /// </summary>
-        /// <param name="message">The message to log.</param>
-        public static void Log(string message)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(message);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
 
+        /// <summary>
+        /// Logs the message with the specified arguments.
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="foregroundColor"></param>
+        /// <param name="args"></param>
+        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
+        static int LogFormat(string format, ConsoleColor foregroundColor, params string[] args)
+        {
+            string loggedMessage = string.Format(format, args);
+            ConsoleColor previousConsoleColor = Console.ForegroundColor;
+
+            Console.ForegroundColor = foregroundColor;
+            Console.WriteLine(loggedMessage);
+            Console.ForegroundColor = previousConsoleColor;
+
+            return loggedMessage.Length;
+        }
         /// <summary>
         /// Logs a message that shows that the <paramref name="imagePath"/> is being copied to <paramref name="newPath"/>,
         /// the color used is from <c>LogImageColor</c>.
@@ -225,31 +193,41 @@ namespace ConsoleUtilitiesLite
         /// <param name="imagePath">The path of the image that is being copied.</param>
         /// <param name="newPath">The new path that the image will be copied to.</param>
         /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        public static int LogImage(string imagePath, string newPath)
-        {
-            string loggedString = $"Copying {newPath}{Path.DirectorySeparatorChar}{Path.GetFileName(imagePath)}";
-            Log(loggedString);
-            return loggedString.Length;
-        }
-
+        public static int LogImage(string imagePath, string newPath) => LogInfoMessage("Copying {0}{1}{2}", newPath, Path.DirectorySeparatorChar.ToString(), Path.GetFileName(imagePath));
         /// <summary>
-        /// Deletes the previous Log of an image being copied by <c>LogImage</c> function.
+        /// Deletes a log that occupies the current line.
+        /// This method assumes the log started at the leftmost point in the console.
         /// </summary>
         /// <param name="width">The size of the previous logged string</param>
         public static void ClearPreviousLog(int width)
         {
-            if (width == 0)
+            int lines;
+            if (width <= 0)
                 return;
+            if (width % Console.BufferWidth == 0)
+                lines = width / Console.BufferWidth;
+            else
+                lines = (int)Math.Floor((decimal)(width / Console.BufferWidth)) + 1;
 
-            int lines = (int)Math.Floor((decimal)(width / Console.BufferWidth)) + 1;
-
-            if (Console.CursorTop > lines)
+            for (; lines != 0; lines--)
             {
-                Console.SetCursorPosition(0, Console.CursorTop - lines);
-                for (int i = 0; i < lines; i++)
-                    Console.Write(new string(' ', Console.BufferWidth));
-                Console.SetCursorPosition(0, Console.CursorTop - lines);
+                ClearCurrentLine();
+
+                bool cursorIsNotAtTheTop = Console.CursorTop > 0;
+                bool isNotLasLine = lines != 1;
+                if (cursorIsNotAtTheTop && isNotLasLine)
+                    GoToPreviousLine();
             }
+        }
+        static void GoToPreviousLine() => Console.CursorTop -= 1;
+        static void ClearCurrentLine()
+        {
+            int initialCursorRow = Console.CursorTop;
+
+            Console.CursorLeft = 0;
+            Console.Write(new string(' ', Console.BufferWidth));
+
+            Console.CursorTop = initialCursorRow;
         }
     }
 }
