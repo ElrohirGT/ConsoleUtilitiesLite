@@ -87,11 +87,7 @@ namespace ConsoleUtilitiesLite
         /// <c>System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());</c>
         /// </summary>
         /// <param name="version">The version of the assembly.</param>
-        public static void ShowVersion(string version)
-        {
-            LogWarningMessage("Running version: {0}", version);
-            Console.WriteLine();
-        }
+        public static void ShowVersion(string version) => LogWarningMessage("Running version: {0}", version);
 
         /// <summary>
         /// Returns the <paramref name="text"/> given width the right amount of spaces to be centered on the screen.
@@ -115,11 +111,7 @@ namespace ConsoleUtilitiesLite
         /// </summary>
         /// <param name="length">The length of the division to create.</param>
         /// <seealso cref="DivisionSign"/>
-        public static void Division(int length)
-        {
-            LogFormat(new string(DivisionSign, length), DivisionColor);
-            Console.WriteLine();
-        }
+        public static void Division(int length) => LogFormat(new string(DivisionSign, length), DivisionColor);
 
         /// <summary>
         /// Creates a sub-division with a length equal to the <c>Console.BufferWidth</c>
@@ -133,11 +125,7 @@ namespace ConsoleUtilitiesLite
         /// </summary>
         /// <param name="length">The length of the division to create.</param>
         /// <seealso cref="DivisionSign"/>
-        public static void SubDivision(int length)
-        {
-            LogFormat(new string(DivisionSign, length), SubDivisionColor);
-            Console.WriteLine();
-        }
+        public static void SubDivision(int length) => LogFormat(new string(DivisionSign, length), SubDivisionColor);
         #endregion
 
         #region Messages Methods
@@ -192,7 +180,7 @@ namespace ConsoleUtilitiesLite
             ConsoleColor previousConsoleColor = Console.ForegroundColor;
 
             Console.ForegroundColor = foregroundColor;
-            Console.Write(loggedMessage);
+            Console.WriteLine(loggedMessage);
             Console.ForegroundColor = previousConsoleColor;
 
             return loggedMessage.Length;
@@ -219,6 +207,8 @@ namespace ConsoleUtilitiesLite
                 lines = length / Console.BufferWidth;
             else
                 lines = (int)Math.Floor((decimal)(length / Console.BufferWidth)) + 1;
+
+            lines++;
 
             for (; lines != 0; lines--)
             {
