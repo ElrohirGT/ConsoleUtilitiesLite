@@ -194,8 +194,8 @@ namespace ConsoleUtilitiesLite
         /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
         public static int LogImage(string imagePath, string newPath) => LogInfoMessage("Copying {0}{1}{2}", newPath, Path.DirectorySeparatorChar.ToString(), Path.GetFileName(imagePath));
         /// <summary>
-        /// Deletes a log that occupies the current line.
-        /// This method assumes the log started at the leftmost point in the console.
+        /// Deletes the previous log.
+        /// Nothing should be outputted to the console between the call of a log and this function for this function to work properly.
         /// </summary>
         /// <param name="length">The size of the previous logged string</param>
         public static void ClearPreviousLog(int length)
