@@ -90,7 +90,7 @@ namespace ConsoleUtilitiesLite
         public static void ShowVersion(string version) => LogWarningMessage("Running version: {0}", version);
 
         /// <summary>
-        /// Returns the <paramref name="text"/> given width the right amount of spaces to be centered on the screen.
+        /// Returns the <paramref name="text"/> given with the right amount of spaces to be centered on the screen.
         /// </summary>
         /// <param name="text">The text to be centered.</param>
         /// <returns>The text with the right amount of spaces.</returns>
