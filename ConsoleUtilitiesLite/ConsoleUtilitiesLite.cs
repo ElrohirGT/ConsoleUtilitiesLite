@@ -3,6 +3,9 @@ using System.IO;
 
 namespace ConsoleUtilitiesLite
 {
+    /// <summary>
+    /// Some simple console utilities I use on my projects.
+    /// </summary>
     public static class ConsoleUtilitiesLite
     {
         /// <summary>
@@ -15,25 +18,25 @@ namespace ConsoleUtilitiesLite
         /// <summary>
         /// Char used to make the divisions on the console.
         /// </summary>
-        /// <seealso cref="Division"/>
+        /// <seealso cref="Division()"/>
         /// <seealso cref="Division(int)"/>
         public static char DivisionSign { get; set; } = '=';
         /// <summary>
         /// Char used to make the sub divisions on the console.
         /// </summary>
-        /// <seealso cref="SubDivision"/>
+        /// <seealso cref="SubDivision()"/>
         /// <seealso cref="SubDivision(int)"/>
         public static char SubDivisionSign { get; set; } = '=';
         /// <summary>
         /// Color used to make divisions on the console.
         /// </summary>
-        /// <seealso cref="Division"/>
+        /// <seealso cref="Division()"/>
         /// <seealso cref="Division(int)"/>
         public static ConsoleColor DivisionColor { get; set; } = ConsoleColor.Cyan;
         /// <summary>
         /// Color used to make sub divisions on the console.
         /// </summary>
-        /// <seealso cref="SubDivision"/>
+        /// <seealso cref="SubDivision()"/>
         /// <seealso cref="SubDivision(int)"/>
         public static ConsoleColor SubDivisionColor { get; set; } = ConsoleColor.Yellow;
         #endregion
