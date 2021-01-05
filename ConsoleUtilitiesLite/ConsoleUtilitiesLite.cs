@@ -85,12 +85,7 @@ namespace ConsoleUtilitiesLite
         /// </summary>
         /// <param name="version">The version of the assembly.</param>
         /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        public static int ShowVersion(string version)
-        {
-            string loggedMessage = $"Running version: {version}";
-            LogWarningMessage(loggedMessage);
-            return loggedMessage.Length;
-        }
+        public static int ShowVersion(string version) => LogWarningMessage("Running version: {0}", version);
         /// <summary>
         /// Returns the <paramref name="text"/> given width the right amount of spaces to be centered on the screen.
         /// </summary>
@@ -181,7 +176,7 @@ namespace ConsoleUtilitiesLite
             ConsoleColor previousConsoleColor = Console.ForegroundColor;
 
             Console.ForegroundColor = foregroundColor;
-            Console.WriteLine(loggedMessage);
+            Console.Write(loggedMessage);
             Console.ForegroundColor = previousConsoleColor;
 
             return loggedMessage.Length;
