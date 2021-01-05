@@ -87,8 +87,12 @@ namespace ConsoleUtilitiesLite
         /// <c>System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());</c>
         /// </summary>
         /// <param name="version">The version of the assembly.</param>
-        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        public static int ShowVersion(string version) => LogWarningMessage("Running version: {0}", version);
+        public static void ShowVersion(string version)
+        {
+            LogWarningMessage("Running version: {0}", version);
+            Console.WriteLine();
+        }
+
         /// <summary>
         /// Returns the <paramref name="text"/> given width the right amount of spaces to be centered on the screen.
         /// </summary>
@@ -100,31 +104,40 @@ namespace ConsoleUtilitiesLite
             return new string(' ', extraSpaces) + text;
         }
         /// <summary>
-        /// Creates a Cyan division with the specified <paramref name="length"/>,
-        /// uses the <c>DivisionSign</c> property to make the division.
-        /// </summary>
-        /// <param name="length">The length of the division to create.</param>
-        /// <seealso cref="DivisionSign"/>
-        public static void Division(int length) => LogFormat(new string(DivisionSign, length), DivisionColor);
-        /// <summary>
         /// Creates a division with a length equal to the <c>Console.BufferWidth</c>,
         /// uses the <c>DivisionSign</c> property to make the division.
         /// </summary>
         /// <seealso cref="DivisionSign"/>
         public static void Division() => Division(Console.BufferWidth);
         /// <summary>
-        /// Creates a sub-division with the specified <paramref name="length"/>,
-        /// uses the <c>SubDivisionSign</c> property to make the division.
+        /// Creates a Cyan division with the specified <paramref name="length"/>,
+        /// uses the <c>DivisionSign</c> property to make the division.
         /// </summary>
         /// <param name="length">The length of the division to create.</param>
         /// <seealso cref="DivisionSign"/>
-        public static void SubDivision(int length) => LogFormat(new string(DivisionSign, length), SubDivisionColor);
+        public static void Division(int length)
+        {
+            LogFormat(new string(DivisionSign, length), DivisionColor);
+            Console.WriteLine();
+        }
+
         /// <summary>
         /// Creates a sub-division with a length equal to the <c>Console.BufferWidth</c>
         /// Uses the <c>SubDivisionSign</c> property to make the division.
         /// </summary>
         /// <seealso cref="DivisionSign"/>
         public static void SubDivision() => SubDivision(Console.BufferWidth);
+        /// <summary>
+        /// Creates a sub-division with the specified <paramref name="length"/>,
+        /// uses the <c>SubDivisionSign</c> property to make the division.
+        /// </summary>
+        /// <param name="length">The length of the division to create.</param>
+        /// <seealso cref="DivisionSign"/>
+        public static void SubDivision(int length)
+        {
+            LogFormat(new string(DivisionSign, length), SubDivisionColor);
+            Console.WriteLine();
+        }
         #endregion
 
         #region Messages Methods
@@ -196,16 +209,16 @@ namespace ConsoleUtilitiesLite
         /// Deletes a log that occupies the current line.
         /// This method assumes the log started at the leftmost point in the console.
         /// </summary>
-        /// <param name="width">The size of the previous logged string</param>
-        public static void ClearPreviousLog(int width)
+        /// <param name="length">The size of the previous logged string</param>
+        public static void ClearPreviousLog(int length)
         {
             int lines;
-            if (width <= 0)
+            if (length <= 0)
                 return;
-            if (width % Console.BufferWidth == 0)
-                lines = width / Console.BufferWidth;
+            if (length % Console.BufferWidth == 0)
+                lines = length / Console.BufferWidth;
             else
-                lines = (int)Math.Floor((decimal)(width / Console.BufferWidth)) + 1;
+                lines = (int)Math.Floor((decimal)(length / Console.BufferWidth)) + 1;
 
             for (; lines != 0; lines--)
             {
