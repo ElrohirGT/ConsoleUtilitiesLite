@@ -1,7 +1,7 @@
 # ConsoleUtilitiesLite
 A simple collection of functions that I use in the console.
 
-You can use it as a NugetPackage: [](https://www.nuget.org/packages/ConsoleUtilitiesLite/)
+You can use it as a [NugetPackage](https://www.nuget.org/packages/ConsoleUtilitiesLite/).
 
 # Documentation
 <a name='assembly'></a>
