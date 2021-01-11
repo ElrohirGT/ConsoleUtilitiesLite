@@ -1,7 +1,7 @@
 # ConsoleUtilitiesLite
 A simple collection of functions that I use in the console.
 
-#Documentation
+# Documentation
 <a name='assembly'></a>
 ## Contents
 
