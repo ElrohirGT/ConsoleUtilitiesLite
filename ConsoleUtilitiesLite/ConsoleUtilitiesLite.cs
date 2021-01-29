@@ -45,22 +45,22 @@ namespace ConsoleUtilitiesLite
         /// <summary>
         /// Text color used in the <c>InfoMessage</c> method.
         /// </summary>
-        /// <seealso cref="LogInfoMessage(string, string[])"/>
+        /// <seealso cref="LogInfoMessage(string, object[])"/>
         public static ConsoleColor InfoMessageColor { get; set; } = ConsoleColor.DarkGray;
         /// <summary>
         /// Text color used in the <c>SuccessMessage</c> method.
         /// </summary>
-        /// <seealso cref="LogSuccessMessage(string, string[])"/>
+        /// <seealso cref="LogSuccessMessage(string, object[])"/>
         public static ConsoleColor SuccessMessageColor { get; set; } = ConsoleColor.Green;
         /// <summary>
         /// Text color used in the <c>WarningMessage</c> method.
         /// </summary>
-        /// <seealso cref="LogWarningMessage(string, string[])"/>
+        /// <seealso cref="LogWarningMessage(string, object[])"/>
         public static ConsoleColor WarningMessageColor { get; set; } = ConsoleColor.DarkYellow;
         /// <summary>
         /// Text color used in the <c>ErrorMessage</c> method.
         /// </summary>
-        /// <seealso cref="LogErrorMessage(string, string[])"/>
+        /// <seealso cref="LogErrorMessage(string, object[])"/>
         public static ConsoleColor ErrorMessageColor { get; set; } = ConsoleColor.Red;
         #endregion
 
@@ -137,7 +137,7 @@ namespace ConsoleUtilitiesLite
         /// <param name="message">The message to write to the console.</param>
         /// <param name="args">An array of objects to write using.</param>
         /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        public static int LogInfoMessage(string message, params string[] args) => LogFormat(message, InfoMessageColor, args);
+        public static int LogInfoMessage(string message, params object[] args) => LogFormat(message, InfoMessageColor, args);
         /// <summary>
         /// Shows the specified <paramref name="message"/>,
         /// With the color of <c>SuccessMessageColor</c>,
@@ -146,7 +146,7 @@ namespace ConsoleUtilitiesLite
         /// <param name="message">The message to write to the console.</param>
         /// <param name="args">An array of objects to write using.</param>
         /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        public static int LogSuccessMessage(string message, params string[] args) => LogFormat(message, SuccessMessageColor, args);
+        public static int LogSuccessMessage(string message, params object[] args) => LogFormat(message, SuccessMessageColor, args);
         /// <summary>
         /// Shows the specified <paramref name="message"/>,
         /// With the color of <c>WarningMessageColor</c>,
@@ -155,7 +155,7 @@ namespace ConsoleUtilitiesLite
         /// <param name="message">The message to write to the console.</param>
         /// <param name="args">An array of objects to write using.</param>
         /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        public static int LogWarningMessage(string message, params string[] args) => LogFormat(message, WarningMessageColor, args);
+        public static int LogWarningMessage(string message, params object[] args) => LogFormat(message, WarningMessageColor, args);
         /// <summary>
         /// Shows the specified <paramref name="message"/>,
         /// With the color of <c>ErrorMessageColor</c>,
@@ -164,7 +164,7 @@ namespace ConsoleUtilitiesLite
         /// <param name="message">The message to write to the console.</param>
         /// <param name="args">An array of objects to write using.</param>
         /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        public static int LogErrorMessage(string message, params string[] args) => LogFormat(message, ErrorMessageColor, args);
+        public static int LogErrorMessage(string message, params object[] args) => LogFormat(message, ErrorMessageColor, args);
         #endregion
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace ConsoleUtilitiesLite
         /// <param name="foregroundColor"></param>
         /// <param name="args"></param>
         /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        static int LogFormat(string format, ConsoleColor foregroundColor, params string[] args)
+        static int LogFormat(string format, ConsoleColor foregroundColor, params object[] args)
         {
             string loggedMessage = string.Format(format, args);
             ConsoleColor previousConsoleColor = Console.ForegroundColor;
