@@ -3,8 +3,9 @@ A simple collection of functions that I use in the console.
 
 You can use it as a [NugetPackage](https://www.nuget.org/packages/ConsoleUtilitiesLite/).
 
-# Documentation
 <a name='assembly'></a>
+# ConsoleUtilitiesLite
+
 ## Contents
 
 - [ConsoleUtilitiesLite](#T-ConsoleUtilitiesLite-ConsoleUtilitiesLite 'ConsoleUtilitiesLite.ConsoleUtilitiesLite')
@@ -21,12 +22,12 @@ You can use it as a [NugetPackage](https://www.nuget.org/packages/ConsoleUtiliti
   - [ClearPreviousLog(length)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-ClearPreviousLog-System-Int32- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.ClearPreviousLog(System.Int32)')
   - [Division()](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-Division 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.Division')
   - [Division(length)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-Division-System-Int32- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.Division(System.Int32)')
-  - [LogErrorMessage(message,args)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogErrorMessage-System-String,System-String[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogErrorMessage(System.String,System.String[])')
-  - [LogFormat(format,foregroundColor,args)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogFormat-System-String,System-ConsoleColor,System-String[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogFormat(System.String,System.ConsoleColor,System.String[])')
+  - [LogErrorMessage(message,args)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogErrorMessage-System-String,System-Object[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogErrorMessage(System.String,System.Object[])')
+  - [LogFormat(format,foregroundColor,args)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogFormat-System-String,System-ConsoleColor,System-Object[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogFormat(System.String,System.ConsoleColor,System.Object[])')
   - [LogImage(imagePath,newPath)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogImage-System-String,System-String- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogImage(System.String,System.String)')
-  - [LogInfoMessage(message,args)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogInfoMessage-System-String,System-String[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogInfoMessage(System.String,System.String[])')
-  - [LogSuccessMessage(message,args)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogSuccessMessage-System-String,System-String[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogSuccessMessage(System.String,System.String[])')
-  - [LogWarningMessage(message,args)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogWarningMessage-System-String,System-String[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogWarningMessage(System.String,System.String[])')
+  - [LogInfoMessage(message,args)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogInfoMessage-System-String,System-Object[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogInfoMessage(System.String,System.Object[])')
+  - [LogSuccessMessage(message,args)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogSuccessMessage-System-String,System-Object[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogSuccessMessage(System.String,System.Object[])')
+  - [LogWarningMessage(message,args)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogWarningMessage-System-String,System-Object[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogWarningMessage(System.String,System.Object[])')
   - [ShowTitle(title)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-ShowTitle-System-String[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.ShowTitle(System.String[])')
   - [ShowVersion(version)](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-ShowVersion-System-String- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.ShowVersion(System.String)')
   - [SubDivision()](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-SubDivision 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.SubDivision')
@@ -76,7 +77,7 @@ Text color used in the `ErrorMessage` method.
 
 ##### See Also
 
-- [ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogErrorMessage](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogErrorMessage-System-String,System-String[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogErrorMessage(System.String,System.String[])')
+- [ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogErrorMessage](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogErrorMessage-System-String,System-Object[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogErrorMessage(System.String,System.Object[])')
 
 <a name='P-ConsoleUtilitiesLite-ConsoleUtilitiesLite-InfoMessageColor'></a>
 ### InfoMessageColor `property`
@@ -87,7 +88,7 @@ Text color used in the `InfoMessage` method.
 
 ##### See Also
 
-- [ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogInfoMessage](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogInfoMessage-System-String,System-String[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogInfoMessage(System.String,System.String[])')
+- [ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogInfoMessage](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogInfoMessage-System-String,System-Object[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogInfoMessage(System.String,System.Object[])')
 
 <a name='P-ConsoleUtilitiesLite-ConsoleUtilitiesLite-SubDivisionColor'></a>
 ### SubDivisionColor `property`
@@ -122,7 +123,7 @@ Text color used in the `SuccessMessage` method.
 
 ##### See Also
 
-- [ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogSuccessMessage](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogSuccessMessage-System-String,System-String[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogSuccessMessage(System.String,System.String[])')
+- [ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogSuccessMessage](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogSuccessMessage-System-String,System-Object[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogSuccessMessage(System.String,System.Object[])')
 
 <a name='P-ConsoleUtilitiesLite-ConsoleUtilitiesLite-TitleColor'></a>
 ### TitleColor `property`
@@ -144,7 +145,7 @@ Text color used in the `WarningMessage` method.
 
 ##### See Also
 
-- [ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogWarningMessage](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogWarningMessage-System-String,System-String[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogWarningMessage(System.String,System.String[])')
+- [ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogWarningMessage](#M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogWarningMessage-System-String,System-Object[]- 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.LogWarningMessage(System.String,System.Object[])')
 
 <a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-CenterLine-System-String-'></a>
 ### CenterLine(text) `method`
@@ -211,7 +212,7 @@ uses the `DivisionSign` property to make the division.
 
 - [ConsoleUtilitiesLite.ConsoleUtilitiesLite.DivisionSign](#P-ConsoleUtilitiesLite-ConsoleUtilitiesLite-DivisionSign 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.DivisionSign')
 
-<a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogErrorMessage-System-String,System-String[]-'></a>
+<a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogErrorMessage-System-String,System-Object[]-'></a>
 ### LogErrorMessage(message,args) `method`
 
 ##### Summary
@@ -229,9 +230,9 @@ The length of the string that was logged, useful for using `ClearPreviousLog`.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | message | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The message to write to the console. |
-| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | An array of objects to write using. |
+| args | [System.Object[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object[] 'System.Object[]') | An array of objects to write using. |
 
-<a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogFormat-System-String,System-ConsoleColor,System-String[]-'></a>
+<a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogFormat-System-String,System-ConsoleColor,System-Object[]-'></a>
 ### LogFormat(format,foregroundColor,args) `method`
 
 ##### Summary
@@ -248,7 +249,7 @@ The length of the string that was logged, useful for using `ClearPreviousLog`.
 | ---- | ---- | ----------- |
 | format | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
 | foregroundColor | [System.ConsoleColor](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ConsoleColor 'System.ConsoleColor') |  |
-| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') |  |
+| args | [System.Object[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object[] 'System.Object[]') |  |
 
 <a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogImage-System-String,System-String-'></a>
 ### LogImage(imagePath,newPath) `method`
@@ -269,7 +270,7 @@ The length of the string that was logged, useful for using `ClearPreviousLog`.
 | imagePath | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The path of the image that is being copied. |
 | newPath | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The new path that the image will be copied to. |
 
-<a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogInfoMessage-System-String,System-String[]-'></a>
+<a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogInfoMessage-System-String,System-Object[]-'></a>
 ### LogInfoMessage(message,args) `method`
 
 ##### Summary
@@ -287,9 +288,9 @@ The length of the string that was logged, useful for using `ClearPreviousLog`.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | message | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The message to write to the console. |
-| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | An array of objects to write using. |
+| args | [System.Object[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object[] 'System.Object[]') | An array of objects to write using. |
 
-<a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogSuccessMessage-System-String,System-String[]-'></a>
+<a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogSuccessMessage-System-String,System-Object[]-'></a>
 ### LogSuccessMessage(message,args) `method`
 
 ##### Summary
@@ -307,9 +308,9 @@ The length of the string that was logged, useful for using `ClearPreviousLog`.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | message | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The message to write to the console. |
-| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | An array of objects to write using. |
+| args | [System.Object[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object[] 'System.Object[]') | An array of objects to write using. |
 
-<a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogWarningMessage-System-String,System-String[]-'></a>
+<a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-LogWarningMessage-System-String,System-Object[]-'></a>
 ### LogWarningMessage(message,args) `method`
 
 ##### Summary
@@ -327,7 +328,7 @@ The length of the string that was logged, useful for using `ClearPreviousLog`.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | message | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The message to write to the console. |
-| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | An array of objects to write using. |
+| args | [System.Object[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object[] 'System.Object[]') | An array of objects to write using. |
 
 <a name='M-ConsoleUtilitiesLite-ConsoleUtilitiesLite-ShowTitle-System-String[]-'></a>
 ### ShowTitle(title) `method`
@@ -394,4 +395,3 @@ uses the `SubDivisionSign` property to make the division.
 ##### See Also
 
 - [ConsoleUtilitiesLite.ConsoleUtilitiesLite.DivisionSign](#P-ConsoleUtilitiesLite-ConsoleUtilitiesLite-DivisionSign 'ConsoleUtilitiesLite.ConsoleUtilitiesLite.DivisionSign')
-
