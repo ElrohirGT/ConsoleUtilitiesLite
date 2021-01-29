@@ -1,7 +1,8 @@
+![Nuget](https://img.shields.io/nuget/v/ConsoleUtilitiesLite?style=for-the-badge)
 # ConsoleUtilitiesLite
 A simple collection of functions that I use in the console.
 
-You can use it as a [NugetPackage](https://www.nuget.org/packages/ConsoleUtilitiesLite/).
+Link to [NugetPackage](https://www.nuget.org/packages/ConsoleUtilitiesLite/).
 
 <a name='assembly'></a>
 # ConsoleUtilitiesLite
