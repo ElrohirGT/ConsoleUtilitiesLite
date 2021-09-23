@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Description>Some simple utilities that I use on my personal projects.</Description>
+    <Authors>ElrohirGT</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\elroh\Documents\Developer\Console Apps\ConsoleUtilities\ConsoleUtilities\ConsoleUtilitiesLite.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>
