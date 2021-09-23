@@ -230,18 +230,18 @@ namespace ConsoleUtilitiesLite
                 lines = length / Console.BufferWidth;
             else
                 lines = (int)Math.Floor((decimal)(length / Console.BufferWidth)) + 1;
-
-            lines++;
+            ++lines;
 
             for (; lines != 0; lines--)
             {
-                ClearCurrentLine();
-
                 bool cursorIsNotAtTheTop = Console.CursorTop > 0;
                 bool isNotLasLine = lines != 1;
                 if (cursorIsNotAtTheTop && isNotLasLine)
                     GoToPreviousLine();
+
+                ClearCurrentLine();
             }
+            Console.CursorLeft = 0;
         }
 
         private static void GoToPreviousLine() => Console.CursorTop -= 1;
