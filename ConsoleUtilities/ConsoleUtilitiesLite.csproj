@@ -9,10 +9,14 @@
     <RepositoryUrl>https://github.com/ElrohirGT/ConsoleUtilitiesLite</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>5.0.0</Version>
+    <Version>5.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\elroh\Documents\Developer\Console Apps\ConsoleUtilities\ConsoleUtilities\ConsoleUtilitiesLite.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>D:\elroh\Documents\Developer\Console Apps\ConsoleUtilities\ConsoleUtilities\ConsoleUtilitiesLite.xml</DocumentationFile>
   </PropertyGroup>
 

@@ -25,7 +25,7 @@ namespace ConsoleUtilitiesLiteTests
         private static void Main(string[] args)
         {
             TitleTest();
-            DeleteTest();
+            //DeleteTest();
             ReallyLargeLogDelete();
         }
 
@@ -33,7 +33,7 @@ namespace ConsoleUtilitiesLiteTests
         {
             int length = LogInfoMessage(new string('-', Console.BufferWidth * 150));
             ClearPreviousLog(length);
-            LogInfoMessage("Only this should be on screen.");
+            LogInfoMessage("There are no \"-\" on the screen.");
         }
 
         private static void DeleteTest()
