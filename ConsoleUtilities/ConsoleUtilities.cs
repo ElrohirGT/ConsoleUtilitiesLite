@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace ConsoleUtilitiesLite
 {
@@ -204,7 +205,17 @@ namespace ConsoleUtilitiesLite
             Console.WriteLine(loggedMessage);
             Console.ForegroundColor = previousConsoleColor;
 
-            return loggedMessage.Length;
+            return CalculateLinesOf(loggedMessage);
+        }
+
+        private static int CalculateLinesOf(string loggedMessage)
+        {
+            string[] logs = loggedMessage.Split('\n', StringSplitOptions.TrimEntries);
+            return logs.Sum(log =>
+            {
+                int v = (int)Math.Ceiling((decimal)log.Length / Console.BufferWidth);
+                return log.Length == 0 ? Console.BufferWidth : v*Console.BufferWidth;
+            });
         }
 
         /// <summary>

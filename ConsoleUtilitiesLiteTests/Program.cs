@@ -25,8 +25,16 @@ namespace ConsoleUtilitiesLiteTests
         private static void Main(string[] args)
         {
             TitleTest();
-            //DeleteTest();
+            DeleteTest();
             ReallyLargeLogDelete();
+            DeleteTestAccountsForNewLines();
+        }
+
+        private static void DeleteTestAccountsForNewLines()
+        {
+            int length = LogInfoMessage("I'm a string that occupies\nmore than one line!\n Hello! I'm Monica");
+            ClearPreviousLog(length);
+            LogInfoMessage("There is no Hello! I'm Monica here.");
         }
 
         private static void ReallyLargeLogDelete()
