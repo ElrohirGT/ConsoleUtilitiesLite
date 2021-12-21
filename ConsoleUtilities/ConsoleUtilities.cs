@@ -154,8 +154,8 @@ namespace ConsoleUtilitiesLite
         /// </summary>
         /// <param name="message">The message to write to the console.</param>
         /// <param name="args">An array of objects to write using.</param>
-        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        public static int LogInfoMessage(string message, params object[] args) => LogFormat(message, InfoMessageColor, args);
+        /// <returns>The size of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
+        public static int[] LogInfoMessage(string message, params object[] args) => LogFormat(message, InfoMessageColor, args);
 
         /// <summary>
         /// Shows the specified <paramref name="message"/>,
@@ -164,8 +164,8 @@ namespace ConsoleUtilitiesLite
         /// </summary>
         /// <param name="message">The message to write to the console.</param>
         /// <param name="args">An array of objects to write using.</param>
-        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        public static int LogSuccessMessage(string message, params object[] args) => LogFormat(message, SuccessMessageColor, args);
+        /// <returns>The size of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
+        public static int[] LogSuccessMessage(string message, params object[] args) => LogFormat(message, SuccessMessageColor, args);
 
         /// <summary>
         /// Shows the specified <paramref name="message"/>,
@@ -174,8 +174,8 @@ namespace ConsoleUtilitiesLite
         /// </summary>
         /// <param name="message">The message to write to the console.</param>
         /// <param name="args">An array of objects to write using.</param>
-        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        public static int LogWarningMessage(string message, params object[] args) => LogFormat(message, WarningMessageColor, args);
+        /// <returns>The size of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
+        public static int[] LogWarningMessage(string message, params object[] args) => LogFormat(message, WarningMessageColor, args);
 
         /// <summary>
         /// Shows the specified <paramref name="message"/>,
@@ -184,19 +184,11 @@ namespace ConsoleUtilitiesLite
         /// </summary>
         /// <param name="message">The message to write to the console.</param>
         /// <param name="args">An array of objects to write using.</param>
-        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        public static int LogErrorMessage(string message, params object[] args) => LogFormat(message, ErrorMessageColor, args);
+        /// <returns>The size of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
+        public static int[] LogErrorMessage(string message, params object[] args) => LogFormat(message, ErrorMessageColor, args);
 
         #endregion Messages Methods
-
-        /// <summary>
-        /// Logs the message with the specified arguments.
-        /// </summary>
-        /// <param name="format"></param>
-        /// <param name="foregroundColor"></param>
-        /// <param name="args"></param>
-        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        private static int LogFormat(string format, ConsoleColor foregroundColor, params object[] args)
+        private static int[] LogFormat(string format, ConsoleColor foregroundColor, params object[] args)
         {
             string loggedMessage = string.Format(format, args);
             ConsoleColor previousConsoleColor = Console.ForegroundColor;
@@ -208,50 +200,31 @@ namespace ConsoleUtilitiesLite
             return CalculateLinesOf(loggedMessage);
         }
 
-        private static int CalculateLinesOf(string loggedMessage)
+        private static int[] CalculateLinesOf(string loggedMessage)
         {
             string[] logs = loggedMessage.Split('\n', StringSplitOptions.TrimEntries);
-            return logs.Sum(log =>
-            {
-                int v = (int)Math.Ceiling((decimal)log.Length / Console.BufferWidth);
-                return log.Length == 0 ? Console.BufferWidth : v*Console.BufferWidth;
-            });
+            return logs.Select(s => s.Length).ToArray();
         }
-
-        /// <summary>
-        /// Logs a message that shows that the <paramref name="imagePath"/> is being copied to <paramref name="newPath"/>,
-        /// the color used is from <c>LogImageColor</c>.
-        /// </summary>
-        /// <param name="imagePath">The path of the image that is being copied.</param>
-        /// <param name="newPath">The new path that the image will be copied to.</param>
-        /// <returns>The length of the string that was logged, useful for using <c>ClearPreviousLog</c>.</returns>
-        public static int LogImage(string imagePath, string newPath) => LogInfoMessage("Copying {0}{1}{2}", newPath, Path.DirectorySeparatorChar.ToString(), Path.GetFileName(imagePath));
 
         /// <summary>
         /// Deletes the previous log.
         /// Nothing should be outputted to the console between the call of a log and this function for this function to work properly.
         /// </summary>
-        /// <param name="length">The size of the previous logged string</param>
-        public static void ClearPreviousLog(int length)
+        /// <param name="lines">The size of the previous logged string</param>
+        public static void ClearPreviousLog(int[] lines)
         {
-            int lines;
-            if (length <= 0)
-                return;
-            if (length % Console.BufferWidth == 0)
-                lines = length / Console.BufferWidth;
-            else
-                lines = (int)Math.Floor((decimal)(length / Console.BufferWidth)) + 1;
-            ++lines;
-
-            for (; lines != 0; lines--)
+            foreach (var lineLength in lines)
             {
-                bool cursorIsNotAtTheTop = Console.CursorTop > 0;
-                bool isNotLasLine = lines != 1;
-                if (cursorIsNotAtTheTop && isNotLasLine)
+                if (lineLength == 0)
+                    continue;
+                int lineSpan = (int)Math.Ceiling((decimal)lineLength / Console.BufferWidth);
+                for (; lineSpan != 0; lineSpan--)
+                {
                     GoToPreviousLine();
-
-                ClearCurrentLine();
+                    ClearCurrentLine();
+                }
             }
+
             Console.CursorLeft = 0;
         }
 

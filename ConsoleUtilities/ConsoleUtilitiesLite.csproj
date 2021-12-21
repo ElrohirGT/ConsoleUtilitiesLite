@@ -14,11 +14,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\elroh\Documents\Developer\Console Apps\ConsoleUtilities\ConsoleUtilities\ConsoleUtilitiesLite.xml</DocumentationFile>
+    <DocumentationFile>.\ConsoleUtilitiesLite.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>D:\elroh\Documents\Developer\Console Apps\ConsoleUtilities\ConsoleUtilities\ConsoleUtilitiesLite.xml</DocumentationFile>
+    <DocumentationFile>.\ConsoleUtilitiesLite.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
