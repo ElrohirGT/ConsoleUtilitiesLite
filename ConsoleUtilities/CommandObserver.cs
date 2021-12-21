@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,11 @@ namespace VideoCompresser
         private readonly CancellationTokenSource _cts = new();
         private CancellationTokenSource? _combinedTokenSource;
         private bool _isDisposed;
+
+        /// <summary>
+        /// Get's a readonly collection of the commands in this observer.
+        /// </summary>
+        public ICollection<ConsoleCommand>? Commands => Dictionary?.Values;
 
         protected override ConsoleKey GetKeyForItem(ConsoleCommand item) => item.ActivatorKey;
         /// <summary>
