@@ -1,11 +1,9 @@
 name: Publish to Nuget
 on:
-  push:
-    branches:
-      - master # Default release branch
-  pull_request:
-    branches:
-      - master
+  workflow_run:
+    workflows: [".Net"]
+    types:
+      - completed
 jobs:
   publish:
     name: build, pack & publish
