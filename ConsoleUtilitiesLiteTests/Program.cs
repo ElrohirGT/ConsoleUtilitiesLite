@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
+
+using ConsoleUtilitiesLite;
+
 using static ConsoleUtilitiesLite.ConsoleUtilities;
 
 namespace ConsoleUtilitiesLiteTests
@@ -28,6 +32,28 @@ namespace ConsoleUtilitiesLiteTests
             DeleteTest();
             ReallyLargeLogDelete();
             DeleteTestAccountsForNewLines();
+            TestProgressBar().Wait();
+        }
+
+        private static async Task TestProgressBar()
+        {
+            var bar = new ConsoleProgressBar(new ProgressBarConfiguration { BarLength = 20 });
+            Random random = new();
+            var reader = bar.OutputChannel;
+            for (int i = 0; i < 101; i++)
+            {
+                float percentage = MathF.Min(i / 100f + (float)random.NextDouble()/100f, 1);
+                bar.UpdatePercentage(percentage);
+            }
+
+            int[] length = Array.Empty<int>();
+            await foreach (var item in reader.ReadAllAsync())
+            {
+                ClearPreviousLog(length);
+                length = LogWarningMessage(item);
+                await Task.Delay(250);
+            }
+            bar.UpdatePercentage(1);
         }
 
         private static void DeleteTestAccountsForNewLines()
