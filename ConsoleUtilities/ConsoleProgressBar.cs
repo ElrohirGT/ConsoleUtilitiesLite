@@ -21,12 +21,20 @@ public partial class ConsoleProgressBar
 
     public ChannelReader<string> OutputChannel { get; }
 
+    public static string CreateProgressBar(float percentageBetween0and1, ProgressBarConfiguration? configuration = null)
+    {
+        var conf = configuration ?? new ProgressBarConfiguration();
+        if (percentageBetween0and1 < 0 || percentageBetween0and1 > 1)
+            throw new ArgumentOutOfRangeException(nameof(percentageBetween0and1));
+        return ConstructProgressBar(percentageBetween0and1, conf);
+    }
+
     public string UpdatePercentage(float percentageBetween0and1)
     {
         if (percentageBetween0and1 < 0 || percentageBetween0and1 > 1)
             throw new ArgumentOutOfRangeException(nameof(percentageBetween0and1));
 
-        string progressBar = ConstructProgressBar(percentageBetween0and1);
+        string progressBar = ConstructProgressBar(percentageBetween0and1, Configuration);
         _channel.Writer.TryWrite(progressBar);
         if (Configuration.AutoTerminate && 1 - percentageBetween0and1 < float.Epsilon)
             _channel.Writer.TryComplete();
@@ -34,17 +42,17 @@ public partial class ConsoleProgressBar
     }
     public bool TryComplete() => _channel.Writer.TryComplete();
 
-    private string ConstructProgressBar(float percentage)
+    private static string ConstructProgressBar(float percentage, ProgressBarConfiguration configuration)
     {
-        byte progress = (byte)Math.Round(Configuration.BarLength * percentage, 0);
+        byte progress = (byte)Math.Round(configuration.BarLength * percentage, 0);
         StringBuilder progressBar = new();
 
-        progressBar.Append(Configuration.StartChar);
-        progressBar.Append(new string(Configuration.BarFiller, progress));
-        progressBar.Append(Configuration.ProgressIndicator);
-        progressBar.Append(new string(Configuration.EmptySpaceFiller, Configuration.BarLength - progress));
-        progressBar.Append(Configuration.EndChar);
-        if (Configuration.ShowPercentage)
+        progressBar.Append(configuration.StartChar);
+        progressBar.Append(new string(configuration.BarFiller, progress));
+        progressBar.Append(configuration.ProgressIndicator);
+        progressBar.Append(new string(configuration.EmptySpaceFiller, configuration.BarLength - progress));
+        progressBar.Append(configuration.EndChar);
+        if (configuration.ShowPercentage)
             progressBar.Append($" {percentage:P2}");
 
         return progressBar.ToString();
