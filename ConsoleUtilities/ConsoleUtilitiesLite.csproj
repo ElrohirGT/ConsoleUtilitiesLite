@@ -9,7 +9,7 @@
     <RepositoryUrl>https://github.com/ElrohirGT/ConsoleUtilitiesLite</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>6.2.0</Version>
+    <Version>6.2.1</Version>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 

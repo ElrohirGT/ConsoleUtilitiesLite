@@ -21,7 +21,7 @@ public partial class ConsoleProgressBar
 
     public ChannelReader<string> OutputChannel { get; }
 
-    public void UpdatePercentage(float percentageBetween0and1)
+    public string UpdatePercentage(float percentageBetween0and1)
     {
         if (percentageBetween0and1 < 0 || percentageBetween0and1 > 1)
             throw new ArgumentOutOfRangeException(nameof(percentageBetween0and1));
@@ -30,6 +30,7 @@ public partial class ConsoleProgressBar
         _channel.Writer.TryWrite(progressBar);
         if (Configuration.AutoTerminate && 1 - percentageBetween0and1 < float.Epsilon)
             _channel.Writer.TryComplete();
+        return progressBar;
     }
     public bool TryComplete() => _channel.Writer.TryComplete();
 
