@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace VideoCompresser
+namespace ConsoleUtilitiesLite
 {
     /// <summary>
     /// A class that listens for user input and activates commands based on that input.
