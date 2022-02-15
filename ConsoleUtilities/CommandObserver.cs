@@ -40,7 +40,7 @@ namespace ConsoleUtilitiesLite
 
         private void ReadAndProcessInput()
         {
-            while (true)
+            while (!_combinedTokenSource?.IsCancellationRequested ?? !_cts.IsCancellationRequested)
             {
                 ConsoleKeyInfo readKey = Console.ReadKey(true);
                 if (!Dictionary.TryGetValue(readKey.Key, out ConsoleCommand command))

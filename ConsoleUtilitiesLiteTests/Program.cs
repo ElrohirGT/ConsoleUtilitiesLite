@@ -26,13 +26,26 @@ namespace ConsoleUtilitiesLiteTests
             "────────────────────────────────────────────────────────────────────────"
         };
 
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             TitleTest();
             DeleteTest();
             ReallyLargeLogDelete();
             DeleteTestAccountsForNewLines();
-            TestProgressBar().Wait();
+            await TestProgressBar();
+            await CommandObserverTest();
+        }
+
+        private static async Task CommandObserverTest()
+        {
+            CommandObserver observer = new();
+            observer.Add(new ConsoleCommand(ConsoleKey.Q, observer.StopObserving, "blabla"));
+
+            Console.WriteLine("Command observer started.");
+            Console.WriteLine("Press Q NOW!");
+            var t = observer.StartObserving();
+            await t;
+            Console.WriteLine("Command Observer stopped.");
         }
 
         private static async Task TestProgressBar()
@@ -51,7 +64,7 @@ namespace ConsoleUtilitiesLiteTests
             {
                 ClearPreviousLog(length);
                 length = LogWarningMessage(item);
-                await Task.Delay(250);
+                await Task.Delay(150);
             }
             bar.UpdatePercentage(1);
         }
