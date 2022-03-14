@@ -152,11 +152,12 @@ namespace ConsoleUtilitiesLite
         /// <param name="successParsing">Will be printed when the value is valid. You can use string formatting: {0} is the value inputted.</param>
         /// <param name="conversor">The function that converts from the string inputted to the value.</param>
         /// <param name="isValid">Must return true if the value is valid.</param>
+        /// <param name="defaultValue">If the user doesn't ingress any value, this value is used.</param>
         /// <returns>The vaue the user ingresed with the specified type conversion applied.</returns>
-        public static T GetUserInput<T>(string askUser, string errorParsing, string successParsing, Func<string, T> conversor, Func<string, bool> isValid)
+        public static T GetUserInput<T>(string askUser, string errorParsing, string successParsing, Func<string, T> conversor, Func<string, bool> isValid, string? defaultValue = null)
         {
             return GetUserInput<T>(
-                () => Console.WriteLine(askUser),
+                () => Console.Write(askUser),
                 conversor,
                 (s) =>
                 {
@@ -168,9 +169,9 @@ namespace ConsoleUtilitiesLite
                     }
                     LogWarningMessage(successParsing, s);
                     return true;
-                }
-                );
+                }, defaultValue);
         }
+
         /// <summary>
         /// Asks the user for some input until <paramref name="isValid"/> returns true.
         /// </summary>
@@ -178,13 +179,15 @@ namespace ConsoleUtilitiesLite
         /// <param name="askUser">The functions that asks the user for input.</param>
         /// <param name="conversor">The functions that parses the Console.Readline value.</param>
         /// <param name="isValid">Must return true when the value is valid.</param>
+        /// <param name="defaultValue">If the user doesn't ingress any value, this value is used.</param>
         /// <returns>The value the user inputted.</returns>
-        public static T GetUserInput<T>(Action askUser, Func<string, T> conversor, Func<string, bool> isValid)
+        public static T GetUserInput<T>(Action askUser, Func<string, T> conversor, Func<string, bool> isValid, string? defaultValue = null)
         {
             while (true)
             {
                 askUser();
-                var answer = Console.ReadLine() ?? string.Empty;
+                string? lineRead = Console.ReadLine();
+                var answer = string.IsNullOrEmpty(lineRead) ? defaultValue ?? string.Empty : lineRead;
                 if (!isValid(answer))
                     continue;
 

@@ -42,11 +42,12 @@ namespace ConsoleUtilitiesLiteTests
             LogInfoMessage("This will ask for a number, and should stop when a valid number is ingresed.");
             LogInfoMessage("The success message should contain the number ingresed.");
             var number = GetUserInput(
-                "Insert a number",
+                "Insert a number (default: 5)",
                 "Please write a valid number",
                 "The number: {0} is valid!",
                 int.Parse,
-                (s) => int.TryParse(s, out _)
+                (s) => int.TryParse(s, out _),
+                "5"
             );
         }
 
