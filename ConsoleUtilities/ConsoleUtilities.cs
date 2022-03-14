@@ -143,6 +143,55 @@ namespace ConsoleUtilitiesLite
         /// <seealso cref="DivisionSign"/>
         public static void SubDivision(int length) => LogFormat(new string(DivisionSign, length), SubDivisionColor);
 
+        /// <summary>
+        /// Asks the user for some input until <paramref name="isValid"/> returns true.
+        /// </summary>
+        /// <typeparam name="T">The type of the input the user is expected to write.</typeparam>
+        /// <param name="askUser">The string that will be showed to the user asking for the value.</param>
+        /// <param name="errorParsing">If the user inputted an incorrect value, this string will be printed.</param>
+        /// <param name="successParsing">Will be printed when the value is valid. You can use string formatting: {0} is the value inputted.</param>
+        /// <param name="conversor">The function that converts from the string inputted to the value.</param>
+        /// <param name="isValid">Must return true if the value is valid.</param>
+        /// <returns>The vaue the user ingresed with the specified type conversion applied.</returns>
+        public static T GetUserInput<T>(string askUser, string errorParsing, string successParsing, Func<string, T> conversor, Func<string, bool> isValid)
+        {
+            return GetUserInput<T>(
+                () => Console.WriteLine(askUser),
+                conversor,
+                (s) =>
+                {
+                    bool isValidCheck = isValid(s);
+                    if (!isValidCheck)
+                    {
+                        LogErrorMessage(errorParsing);
+                        return false;
+                    }
+                    LogWarningMessage(successParsing, s);
+                    return true;
+                }
+                );
+        }
+        /// <summary>
+        /// Asks the user for some input until <paramref name="isValid"/> returns true.
+        /// </summary>
+        /// <typeparam name="T">The type of the input the user is expected to write.</typeparam>
+        /// <param name="askUser">The functions that asks the user for input.</param>
+        /// <param name="conversor">The functions that parses the Console.Readline value.</param>
+        /// <param name="isValid">Must return true when the value is valid.</param>
+        /// <returns>The value the user inputted.</returns>
+        public static T GetUserInput<T>(Action askUser, Func<string, T> conversor, Func<string, bool> isValid)
+        {
+            while (true)
+            {
+                askUser();
+                var answer = Console.ReadLine() ?? string.Empty;
+                if (!isValid(answer))
+                    continue;
+
+                return conversor(answer);
+            }
+        }
+
         #endregion Simple Methods
 
         #region Messages Methods

@@ -34,6 +34,20 @@ namespace ConsoleUtilitiesLiteTests
             DeleteTestAccountsForNewLines();
             await TestProgressBar();
             await CommandObserverTest();
+            TestUserInput();
+        }
+
+        private static void TestUserInput()
+        {
+            LogInfoMessage("This will ask for a number, and should stop when a valid number is ingresed.");
+            LogInfoMessage("The success message should contain the number ingresed.");
+            var number = GetUserInput(
+                "Insert a number",
+                "Please write a valid number",
+                "The number: {0} is valid!",
+                int.Parse,
+                (s) => int.TryParse(s, out _)
+            );
         }
 
         private static async Task CommandObserverTest()
