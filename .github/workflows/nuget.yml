@@ -20,6 +20,6 @@ jobs:
       - name: Build
         run: dotnet build ConsoleUtilities/ConsoleUtilitiesLite.csproj -c Release
       - name: Pack
-        run: dotnet pack ConsoleUtilities/ConsoleUtilitiesLite.csproj -c Release
+        run: dotnet pack ConsoleUtilities/ConsoleUtilitiesLite.csproj -c Release -o .
       - name: Publish to GitHub packages 
-        run: dotnet nuget push ConsoleUtilities/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate`
+        run: dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate`
