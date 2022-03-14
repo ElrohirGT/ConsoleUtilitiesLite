@@ -17,6 +17,8 @@ jobs:
           dotnet-version: 6.0.x
 
       # Publish
+      - name: Build
+        run: dotnet build ConsoleUtilities/ConsoleUtilitiesLite.csproj -c Release
       - name: Pack
         run: dotnet pack ConsoleUtilities/ConsoleUtilitiesLite.csproj -c Release
       - name: Publish to GitHub packages 
